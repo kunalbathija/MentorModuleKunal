@@ -1,0 +1,104 @@
+<html>
+    <head>
+      <title>TSS Employee Form Kunal</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    </head>
+    <style>
+
+      h1{
+        text-align: center;
+      }
+
+      .inputDiv{
+        width: 30rem;
+      }
+
+      .container{
+        justify-content: center;
+        width: 60%;
+      }
+
+      @media (max-width: 800px){
+        div.container {
+          width: 100%;
+        }
+      }
+      
+
+    </style>
+    <body>
+      <h1 class="mb-3">Employee Form</h1>
+      <div class="container" >
+        <div class="card">
+          <div class="card-header">
+            Employee
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="d-flex flex-column">
+                <div class="d-flex flex-wrap mb-3 justify-content-between">
+                  <div>
+                    <label for="emp_id">Employee id:</label>
+                  </div>
+                  <div class="inputDiv">
+                    <input class="form-control" type="text" name="emp_id" id="emp_id" >
+                  </div>
+                </div>
+      
+                <div class="d-flex flex-wrap mb-3 justify-content-between">
+                  <div >
+                    <label for="name">Name:</label>
+                  </div>
+                  <div class="inputDiv">
+                    <input class="form-control" type="text" name="name" id="name" >
+                  </div>
+                </div>
+      
+                <div class="d-flex flex-wrap mb-3 justify-content-between">
+                  <div >
+                    <label for="team">Team:</label>
+                  </div>
+                  <div class="inputDiv">
+                    <input class="form-control" type="text" name="tem" id="team" >
+                  </div>
+                </div>
+      
+                <div class="d-flex flex-wrap mb-3 justify-content-between">
+                  <div >
+                    <label for="designation">Designation:</label>
+                  </div>
+                  <div class="inputDiv">
+                    <select name="designation" id="designation" class="form-select">
+                      <option value="tester">Tester</option>
+                      <option value="developer">Developer</option>
+                  </select>
+                  </div>
+                </div>
+      
+                <div class="d-flex flex-wrap mb-3">
+                  <div class="me-auto">
+                    <label for="gender">Gender:</label>
+                  </div>
+                  <div class="inputDiv d-flex flex-row">
+                    <div class="me-3">
+                      <input class="form-check-input" type="radio" id="male" name="gender" value="male">
+                      <label for="male">Male</label><br>
+                    </div>
+                    <div>
+                      <input class="form-check-input" type="radio" id="female" name="gender" value="female">
+                      <label for="female">Female</label><br>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              
+    
+              <button class="btn btn-primary float-end">Submit</button>
+    
+            </form>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
