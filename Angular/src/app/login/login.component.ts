@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from './login.service';
 
 @Component({
@@ -13,9 +13,12 @@ export class LoginComponent implements OnInit {
   password='';
   error: string | null = null;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('userData')){
+      this.router.navigate(['/directory']);
+    }
   }
 
   login(){

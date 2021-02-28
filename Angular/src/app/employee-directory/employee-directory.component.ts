@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EmployeeListService } from '../employee-list.service';
 import { Employee } from '../employee.model';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-directory',
@@ -13,7 +14,7 @@ export class EmployeeDirectoryComponent implements OnInit, OnDestroy {
 
   private employeeSubscription!: Subscription;
 
-  constructor(private router: Router, private elService: EmployeeListService) { }
+  constructor(private router: Router, private elService: EmployeeListService, private loginService: LoginService) { }
 
   employees!: Employee[];
 
@@ -35,6 +36,11 @@ export class EmployeeDirectoryComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.employeeSubscription.unsubscribe();
+  }
+
+  onLogout(){
+    this.router.navigate(['/login']);
+    this.loginService.logout();
   }
 
 }
