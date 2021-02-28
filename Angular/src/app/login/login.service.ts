@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 })  
 export class LoginService{
 
-    users= {username:'kunal.bathija', password:'123456'} ;
+    users= {username:'kunal', password:'123'} ;
     error='';
     isUserLoggedIn = false;
 

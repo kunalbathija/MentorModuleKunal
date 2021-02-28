@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   login(){
     const result = this.loginService.login(this.username, this.password);
     if(result){
-      this.router.navigate(['/employeelist']);
+      this.router.navigate(['/directory']);
     }else{
       this.error = this.loginService.error;
     }

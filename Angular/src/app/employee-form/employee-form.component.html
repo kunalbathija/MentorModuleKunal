@@ -1,0 +1,77 @@
+<div class="container" >
+  <h1 class="mb-3">Employee Form</h1>
+  <div class="card">
+    <div class="card-header">Information</div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-wrap mb-3 justify-content-between">
+            <div>
+              <label for="emp_id">Employee id:</label>
+            </div>
+            <div class="inputDiv">
+              <input class="form-control" type="text" name="emp_id" id="emp_id" ngModel required>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap mb-3 justify-content-between">
+            <div >
+              <label for="name">Name:</label>
+            </div>
+            <div class="inputDiv">
+              <input class="form-control" type="text" name="name" id="name" ngModel required>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap mb-3 justify-content-between">
+            <div >
+              <label for="team">Team:</label>
+            </div>
+            <div class="inputDiv">
+              <input class="form-control" type="text" name="team" id="team" ngModel required>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap mb-3 justify-content-between">
+            <div >
+              <label for="designation">Designation:</label>
+            </div>
+            <div class="inputDiv">
+              <select name="designation" id="designation" class="form-select" ngModel required>
+                <option value="tester">Tester</option>
+                <option value="developer">Developer</option>
+            </select>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap mb-3">
+            <div class="me-auto">
+              <label for="gender">Gender:</label>
+            </div>
+            <div class=" inputDiv2 d-flex flex-row">
+              <div class="me-5 radio" *ngFor="let gender of genders"> 
+                <label>
+                    <input type="radio" name="gender" class="form-check-input" ngModel [value]="gender" required> {{ gender }}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap mb-3 justify-content-between">
+            <div >
+              <label for="doj">Joining Date:</label>
+            </div>
+            <div class="inputDiv">
+              <input type="text" placeholder="DD/MM/YYYY" id="doj" name="doj" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', isAnimated: true, adaptivePosition: true }" ngModel required>
+            </div>
+          </div>
+
+        </div>
+        
+        <!-- [disabled]="!myForm.valid" -->
+        <button class="btn btn-primary float-end" >Submit</button>
+
+      </form>
+    </div>
+  </div>
+</div>

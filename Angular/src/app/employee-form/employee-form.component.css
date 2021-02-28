@@ -1,0 +1,18 @@
+.inputDiv{
+    width: 30rem;
+}
+
+.inputDiv2{
+    width: 29rem;
+}
+
+.container{
+    justify-content: center;
+    width: 90%;
+}
+
+@media (max-width: 800px){
+    div.container {
+        width: 100%;
+    }
+}
