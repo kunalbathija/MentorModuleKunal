@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { EmployeeListService } from '../employee-list.service';
-import { Employee } from '../employee.model';
+import { EmployeeListService } from '../shared/employee-list.service';
+import { Employee } from '../shared/employee';
 import { LoginService } from '../login/login.service';
 
 @Component({
@@ -21,12 +21,10 @@ export class EmployeeDirectoryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.employees = this.elService.getEmployees();
-    this.employeeSubscription = this.elService.employeeChanged.subscribe(
-      (employees: Employee[]) => {
-        this.employees = employees;
-      });
-
-      console.log(this.employees);
+    // this.employeeSubscription = this.elService.employeeChanged.subscribe(
+    //   (employees: Employee[]) => {
+    //     this.employees = employees;
+    //   });
 
   }
 
@@ -35,7 +33,7 @@ export class EmployeeDirectoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.employeeSubscription.unsubscribe();
+    //this.employeeSubscription.unsubscribe();
   }
 
   onLogout(){

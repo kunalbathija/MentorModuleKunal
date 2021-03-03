@@ -10,7 +10,12 @@
               <label for="emp_id">Employee id:</label>
             </div>
             <div class="inputDiv">
-              <input class="form-control" type="text" name="emp_id" id="emp_id" ngModel required>
+              <input 
+              class="form-control" 
+              type="text" 
+              name="emp_id" 
+              id="emp_id" ngModel required #emp_id="ngModel" [(ngModel)]="employee.emp_id" />
+              <span class="form-text" *ngIf="emp_id.invalid && emp_id.touched">This field is required</span>
             </div>
           </div>
 
@@ -19,7 +24,12 @@
               <label for="name">Name:</label>
             </div>
             <div class="inputDiv">
-              <input class="form-control" type="text" name="name" id="name" ngModel required>
+              <input 
+              class="form-control" 
+              type="text" 
+              name="name" 
+              id="name" ngModel required #name="ngModel" [(ngModel)]="employee.name">
+              <span class="form-text" *ngIf="name.invalid && name.touched">This field is required</span>
             </div>
           </div>
 
@@ -28,7 +38,12 @@
               <label for="team">Team:</label>
             </div>
             <div class="inputDiv">
-              <input class="form-control" type="text" name="team" id="team" ngModel required>
+              <input 
+              class="form-control" 
+              type="text" 
+              name="team" 
+              id="team" ngModel required #team="ngModel" [(ngModel)]="employee.team">
+              <span class="form-text" *ngIf="team.invalid && team.touched">This field is required</span>
             </div>
           </div>
 
@@ -37,10 +52,14 @@
               <label for="designation">Designation:</label>
             </div>
             <div class="inputDiv">
-              <select name="designation" id="designation" class="form-select" ngModel required>
-                <option value="tester">Tester</option>
-                <option value="developer">Developer</option>
-            </select>
+              <select 
+              name="designation" 
+              id="designation" 
+              class="form-select" ngModel required #designation="ngModel" [(ngModel)]="employee.designation">
+                <option value="Tester">Tester</option>
+                <option value="Developer">Developer</option>
+              </select>
+              <span class="form-text" *ngIf="designation.invalid && designation.touched">This field is required</span>
             </div>
           </div>
 
@@ -51,7 +70,10 @@
             <div class=" inputDiv2 d-flex flex-row">
               <div class="me-5 radio" *ngFor="let gender of genders"> 
                 <label>
-                    <input type="radio" name="gender" class="form-check-input" ngModel [value]="gender" required> {{ gender }}
+                    <input 
+                    type="radio" 
+                    name="gender" 
+                    class="form-check-input" ngModel [value]="gender" required [(ngModel)]="employee.gender"> {{ gender }} 
                 </label>
               </div>
             </div>
@@ -62,14 +84,21 @@
               <label for="doj">Joining Date:</label>
             </div>
             <div class="inputDiv">
-              <input type="text" placeholder="DD/MM/YYYY" id="doj" name="doj" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', isAnimated: true, adaptivePosition: true }" ngModel required>
+              <input 
+              type="text" 
+              placeholder="DD/MM/YYYY" 
+              id="doj" name="doj" 
+              class="form-control" 
+              bsDatepicker 
+              [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', isAnimated: true, adaptivePosition: true }" 
+              ngModel required #doj="ngModel"
+              [(ngModel)]="employee.doj">
+              <span class="form-text" *ngIf="doj.invalid && doj.touched">This field is required</span>
             </div>
           </div>
 
         </div>
-        
-        <!-- [disabled]="!myForm.valid" -->
-        <button class="btn btn-primary float-end" >Submit</button>
+        <button class="btn btn-primary float-end" [disabled]="!myForm.valid">Submit</button>
 
       </form>
     </div>
