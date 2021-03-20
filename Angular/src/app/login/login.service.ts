@@ -1,9 +1,13 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
 })  
 export class LoginService{
+
+    constructor(private http: HttpClient) {}
 
     user= {username:'kunal', password:'123'} ;
     error='';
@@ -44,6 +48,12 @@ export class LoginService{
             return;
         }
         this.isUserLoggedIn = true;
+    }
+
+    getDataFromBackend(){
+        
+        
+
     }
 
 }

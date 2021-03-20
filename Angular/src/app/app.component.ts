@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login/login.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +20,12 @@ export class AppComponent implements OnInit{
   }
 
   getString(){
-    this.http.get('https://localhost:44346/api/login').subscribe(response => {
-      this.apiString = response;
+    return this.http.get('https://localhost:44346/api/login')
+    //.pipe(map( response => response.json()))
+    .subscribe(result => {
+      this.apiString = result
     }, error => {
       console.log(error);
-    });
+    })
   }
 }

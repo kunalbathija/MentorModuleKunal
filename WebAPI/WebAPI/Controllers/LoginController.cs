@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace WebAPI.Controllers
 {
@@ -8,9 +9,9 @@ namespace WebAPI.Controllers
     {
         [HttpGet]
         //to be made async for other data structures to be passed.
-        public ActionResult<string> Display()
+        public IEnumerable<string> Display()
         {
-            return "My first ASP.NET Core project, trial second commit";
+            return new string[] { "My first WebAPI Project"};
         }
     }
 }
