@@ -11,7 +11,7 @@ import { Employee } from '../shared/employee';
 })
 export class EmployeeFormComponent implements OnInit {
 
-  @ViewChild('myForm') employeeForm!: NgForm;
+  //@ViewChild('myForm') employeeForm!: NgForm;
 
   genders = ['Male', 'Female'];
 

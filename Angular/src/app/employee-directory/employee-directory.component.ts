@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EmployeeListService } from '../shared/employee-list.service';
 import { Employee } from '../shared/employee';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../shared/login.service';
 
 @Component({
   selector: 'app-directory',

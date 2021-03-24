@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header"> Login </div>
             <div class="card-body">
-            <form>
+            <form #myForm="ngForm" (ngSubmit)="login()">
                 <div class="d-flex flex-column mb-3">
                     <label for="username">Username:</label>
                     <input type="text" name="username" id="username" class="form-control" [(ngModel)]="username">
@@ -17,7 +17,7 @@
                     <label for="password">Password:</label>
                     <input type="password" name="password" id="password" class="form-control" [(ngModel)]="password">
                 </div>
-                <button class="btn btn-primary" (click)="login()">Submit</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
 
             </form>
             </div>
