@@ -5,36 +5,17 @@ import { Subscription } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })  
-export class LoginService implements OnDestroy{
-
-    private subscription: Subscription = new Subscription();
+export class LoginService{
 
     constructor(private http: HttpClient) {}
 
-    //user= {username:'kunal', password:'123'} ;
     error='';
     isUserLoggedIn = false;
 
-    login(username: string, password: string): boolean{
-        const user = {"username": username, "password": password}
-        this.subscription = this.http.post('https://localhost:44346/api/login', user)
-                        .subscribe(responseData => {
-                            console.log(responseData);
-                            if(responseData){
-                                localStorage.setItem('userData', JSON.stringify(user));
-                                this.isUserLoggedIn = true;
-                            }else{
-                                this.isUserLoggedIn = false;
-                            }
-                        }, error => {
-                            console.log(error.message);
-                            this.error="Invalid username or password";
-                        });
-        if(this.isUserLoggedIn){
-            return true;
-        }else{
-            return false;
-        }
+    login(user: any){
+        
+        return this.http.post('https://localhost:44346/api/login', user);
+                        
     }
 
     isAuthenticated(){
@@ -63,8 +44,6 @@ export class LoginService implements OnDestroy{
         this.isUserLoggedIn = true;
     }
 
-    ngOnDestroy(){
-        this.subscription.unsubscribe();
-    }
+    
 
 }
