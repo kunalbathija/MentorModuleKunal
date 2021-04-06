@@ -1,0 +1,29 @@
+<div class="container mt-3 mb-3 ">
+    <div class="d-flex flex-wrap justify-content-between">
+      <div >
+        <h1>Cart</h1>
+      </div>
+      <div>
+        <button class="btn btn-danger me-3" (click)="emptyCart()">Empty Cart</button>
+        <button class="btn btn-primary me-3" (click)="goToProducts()">Check Products</button>
+        <button class="btn btn-success" >Buy Now</button>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cartProduct of cartProducts">
+                  <td>{{cartProduct.name}}</td>
+                  <td><input type="number" class="form-control" value="0"></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+</div>
