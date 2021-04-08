@@ -45,4 +45,8 @@ export class CartService {
     emptyCart(){
         return this.http.delete('https://localhost:44325/api/product/cart/delete');
     }
+
+    buyNow(){
+        
+    }
 }

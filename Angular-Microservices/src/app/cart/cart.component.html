@@ -5,10 +5,10 @@
       </div>
       <div>
         <button class="btn btn-danger me-3" (click)="emptyCart()">Empty Cart</button>
-        <button class="btn btn-primary me-3" (click)="goToProducts()">Check Products</button>
-        <button class="btn btn-success" >Buy Now</button>
+        <button class="btn btn-primary" (click)="goToProducts()">Check Products</button>
       </div>
     </div>
+    <form (ngSubmit)="buyNow()" #myForm="ngForm">
     <div class="d-flex justify-content-center mt-3">
         <table class="table table-bordered">
             <thead>
@@ -18,12 +18,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cartProduct of cartProducts">
+              <tr *ngFor="let cartProduct of cartProducts; let i=index;">
+                  <!-- Messed up -->
+                  <input type="text" value={{cartProduct.id}} name="id{{i}}" id="id{{i}}" [(ngModel)]="cartBuyNowProduct[i].id">
+                  <input type="text" value={{cartProduct.name}} name="name{{i}}" id="name{{i}}" [(ngModel)]="cartBuyNowProduct[i].name" >
                   <td>{{cartProduct.name}}</td>
-                  <td><input type="number" class="form-control" value="0"></td>
+                  <td><input type="number" min="0" class="form-control" name="quantity{{i}}" id="quantity{{i}}" value="1" [(ngModel)]="cartBuyNowProduct[i].quantity"></td>
               </tr>
             </tbody>
+            
           </table>
     </div>
+    <button class="btn btn-success float-end" >Buy Now</button>    
+
+    </form>
 
 </div>

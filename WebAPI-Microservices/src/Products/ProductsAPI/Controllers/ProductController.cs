@@ -69,5 +69,20 @@ namespace ProductsAPI.Controllers
         {
             return cartManager.GetSize();
         }
+
+        [HttpPost("availability")]
+        public ActionResult<int> GetAvailabilty([FromBody] int id)
+        {
+            try
+            {
+                var tempProduct = new ProductModel();
+                tempProduct = productManager.GetProductById(id);
+                return Ok(tempProduct.availability);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
     }
 }
