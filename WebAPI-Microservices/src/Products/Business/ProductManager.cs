@@ -29,7 +29,7 @@ namespace Business
 
         public ProductModel GetProductById(int id)
         {
-            cartManager.AddProduct(_products.FirstOrDefault(x => x.id == id));
+            //cartManager.AddProduct(_products.FirstOrDefault(x => x.id == id));
             return _products.FirstOrDefault(x => x.id == id);
         }
     }

@@ -8,12 +8,14 @@ import { CartComponent } from './cart/cart.component';
 import { ProductsComponent } from './products/products.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { StatusComponent } from './status/status.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CartComponent,
-    ProductsComponent
+    ProductsComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,

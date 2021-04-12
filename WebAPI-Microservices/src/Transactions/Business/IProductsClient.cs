@@ -10,6 +10,6 @@ namespace Business
     public interface IProductsClient
     {
         Task<int> GetAvailability(int id);
-        Task<List<ProductModel>> GetCartProducts();
+        Task<List<CartProductModel>> GetCartProducts();
     }
 }

@@ -23,7 +23,7 @@
         <td>{{product.name}}</td>
         <td>{{product.availability}}</td>
         <td>{{product.description}}</td>
-        <td><a href="" style="cursor: pointer;" (click)="addToCart(i)">Add</a></td>
+        <td><a (click)="addToCart(i, product.name)"><h6>Add</h6></a></td>
       </tr>
     </tbody>
   </table>

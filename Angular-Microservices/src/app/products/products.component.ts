@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService } from '../shared/cart.service';
+import { CartProductModel } from '../shared/cartProductModel';
 import { Product } from '../shared/product';
 import { ProductsService } from '../shared/products.service';
 
@@ -37,9 +38,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
                           console.log(error)
                         }));
 
-    // this.subscription.add(this.cartService.sizeChanged.subscribe(res => {
-    //   this.cartSize = res;
-    // }));
     
   }
 
@@ -47,14 +45,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/cart']);
   }
 
-  addToCart(i: number){
-    this.subscription.add(this.cartService.addProductToCart(i)
+  addToCart(i: number, name: string){
+    const newCartProduct: CartProductModel ={
+      id: i,
+      name: name,
+      quantity: 0
+    }
+    this.subscription.add(this.cartService.addProductToCart(newCartProduct)
                       .subscribe(res => {
-                        //console.log(res)
+                        this.cartSize = res
+                        console.log(res)
                       }, error=> {
+                        
                         console.log(error)
                       }));
-    //window.location.reload();
   }
 
   ngOnDestroy(){

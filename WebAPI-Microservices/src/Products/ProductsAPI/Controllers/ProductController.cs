@@ -22,25 +22,24 @@ namespace ProductsAPI.Controllers
             this.cartManager = cartManager;
         }
 
-        [HttpGet]
+        [HttpGet] 
         public ActionResult<List<ProductModel>> Get()
         {
             return productManager.GetAllProducts();
         }
 
         [HttpPost("cart/add")]
-        public IActionResult AddProductToCart([FromBody] int id)
+        public ActionResult<int> AddProductToCart([FromBody] CartProductModel cartProductModel)
         {
             try
             {
-                var tempProduct = new ProductModel();
-                tempProduct = productManager.GetProductById(id);
-                cartManager.AddProduct(tempProduct);
-                return Ok();
+                cartManager.AddProduct(cartProductModel);
+                var cartSize = cartManager.GetSize();
+                return Ok(cartSize);
             }
             catch
             {
-                return NotFound();
+                return NotFound(0);
             }
         }
 
@@ -59,7 +58,7 @@ namespace ProductsAPI.Controllers
         }
 
         [HttpGet("cart/products")]
-        public ActionResult<List<ProductModel>> GetCartProducts()
+        public ActionResult<List<CartProductModel>> GetCartProducts()
         {
             return cartManager.GetCartProducts();
         }

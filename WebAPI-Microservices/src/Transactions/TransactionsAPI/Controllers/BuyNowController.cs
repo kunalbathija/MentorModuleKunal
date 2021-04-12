@@ -25,44 +25,40 @@ namespace TransactionsAPI.Controllers
             this.paymentManager = paymentManager;
         }
 
-
+        //get all products in cart
         [HttpGet("cart/products")]
-        public async Task<ActionResult<List<ProductModel>>> GetCartProducts()
+        public async Task<ActionResult<List<CartProductModel>>> GetCartProducts()
         {
 
             return await productsClient.GetCartProducts();
 
-
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> GetAvaibility([FromBody] List<CartProductModel> cartProducts)
+        public async Task<ActionResult<IEnumerable<string>>> BuyNow([FromBody] List<CartProductModel> cartProducts)
         {
-            int size = cartProducts.Count();
-            for(int i = 0; i < size; i++)
+            //Checking availibity
+            foreach(CartProductModel cartProduct in cartProducts)
             {
-                var tempAvailibilty = await productsClient.GetAvailability(cartProducts[i].id);
-                Console.WriteLine("Output");
-                Console.WriteLine(tempAvailibilty);
-                Console.WriteLine(cartProducts[i].quantity);
-                Console.WriteLine("OP - End");
-                if (tempAvailibilty < cartProducts[i].quantity)
+                var tempAvailibilty = await productsClient.GetAvailability(cartProduct.id);
+                if (tempAvailibilty < cartProduct.quantity)
                 {
-                    return BadRequest("The product " + cartProducts[i].name + " is out of stock");
+                    return BadRequest(new string[] { "The product " + cartProduct.name + " is out of stock" });
                 }
 
             }
-
+            
+            //Checking payment
             if (paymentManager.checkPayment())
             {
-                return Ok("Success");
+                return Ok(new string[] { "Success" });
             }
             else
             {
-                return BadRequest("Failure in payment");
+                return BadRequest(new string[] { "Failure in payment" });
             }
 
-            
+
         }
     }
 }

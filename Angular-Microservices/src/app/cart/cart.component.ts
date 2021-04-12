@@ -1,32 +1,25 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService } from '../shared/cart.service';
 import { CartProductModel } from '../shared/cartProductModel';
 import { Product } from '../shared/product';
+import { StatusService } from '../shared/status.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
 
-  @ViewChild('myForm') CartBuyNowForm!: NgForm;
 
-  cartProducts!: Product[];
-
-  cartBuyNowProducts: CartProductModel[] = [];
-  cartBuyNowProduct: CartProductModel = {
-    id: 0,
-    name: '',
-    quantity: 0
-  }
-
+  cartProducts!:  CartProductModel[];
+  
   private subscription: Subscription = new Subscription();
 
-  constructor(private cartService: CartService, private router: Router) { }
+  constructor(private cartService: CartService, private router: Router, private statusService: StatusService) { }
 
   ngOnInit(): void {
     this.subscription.add(this.cartService.getAllCartProducts()
@@ -52,17 +45,24 @@ export class CartComponent implements OnInit {
     }))
   }
 
-  //Messed up
+
   buyNow(){
-    // for(let i=0;i<this.cartProducts.length;i++){
-    //   const x = this.cartProducts[i].name
-    //   console.log(this.CartBuyNowForm.value.id-i);
-    //   //console.log(this.CartBuyNowForm.value.quantity-i);
-    //   var tempCartProduct!: CartProductModel;
-    //   //tempCartProduct.id = this.CartBuyNowForm.value.id-i;
-    // }
-    this.cartBuyNowProducts.push(this.cartBuyNowProduct);
-    console.log(this.cartBuyNowProducts);
+    console.log(this.cartProducts);
+    this.subscription.add(this.cartService.buyNow(this.cartProducts).subscribe(res => {
+      this.statusService.success = true;
+      console.log(res)
+      this.statusService.errorMessage = res.toString();
+      this.router.navigate(['/status']);
+    }, error => {
+      this.statusService.success = false;
+      this.statusService.errorMessage = error.error;
+      console.log(error)
+      this.router.navigate(['/status']);
+    }));
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }

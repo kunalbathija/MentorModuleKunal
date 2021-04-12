@@ -19,11 +19,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let cartProduct of cartProducts; let i=index;">
-                  <!-- Messed up -->
-                  <input type="text" value={{cartProduct.id}} name="id{{i}}" id="id{{i}}" [(ngModel)]="cartBuyNowProduct[i].id">
-                  <input type="text" value={{cartProduct.name}} name="name{{i}}" id="name{{i}}" [(ngModel)]="cartBuyNowProduct[i].name" >
+                  <input type="hidden" value={{cartProduct.id}} name="id{{i}}" id="id{{i}}" [(ngModel)]="cartProduct.id">
+                  <input type="hidden" value={{cartProduct.name}} name="name{{i}}" id="name{{i}}" [(ngModel)]="cartProduct.name" >
                   <td>{{cartProduct.name}}</td>
-                  <td><input type="number" min="0" class="form-control" name="quantity{{i}}" id="quantity{{i}}" value="1" [(ngModel)]="cartBuyNowProduct[i].quantity"></td>
+                  <td><input type="number" min="0" class="form-control" name="quantity{{i}}" id="quantity{{i}}" value="1" [(ngModel)]="cartProduct.quantity"></td>
               </tr>
             </tbody>
             

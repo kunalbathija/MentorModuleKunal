@@ -8,11 +8,11 @@ namespace Business
 {
     public class CartManager: ICartManager
     {
-        private List<ProductModel> _cartProducts;
+        private List<CartProductModel> _cartProducts;
 
         public CartManager()
         {
-            _cartProducts = new List<ProductModel>() { };
+            _cartProducts = new List<CartProductModel>() { };
         }
 
         public int GetSize()
@@ -20,23 +20,23 @@ namespace Business
             return _cartProducts.Count();
         }
 
-        public void AddProduct(ProductModel product)
+        public void AddProduct(CartProductModel newProduct)
         {
-            if(_cartProducts.FirstOrDefault(x => x.id == product.id) != null)
+            if(_cartProducts.FirstOrDefault(x => x.id == newProduct.id) != null)
             {
                 return;
             }
-            this._cartProducts.Add(product);
+            this._cartProducts.Add(newProduct);
         }
 
-        public List<ProductModel> GetCartProducts()
+        public List<CartProductModel> GetCartProducts()
         {
             return this._cartProducts;
         }
 
         public void EmptyCart()
         {
-            this._cartProducts = new List<ProductModel>() { };
+            this._cartProducts = new List<CartProductModel>() { };
         }
     }
 }

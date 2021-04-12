@@ -17,7 +17,8 @@ namespace Business
             this.httpClient = httpClient;
         }
 
-        public async Task<List<ProductModel>> GetCartProducts()
+        //extra - is of no use - for trial purpose
+        public async Task<List<CartProductModel>> GetCartProducts()
         {
 
             var response = await httpClient.GetAsync("/api/product/cart/products");
@@ -27,7 +28,7 @@ namespace Business
                 return null;
             }
             var ObjResponse = response.Content.ReadAsStringAsync().Result;
-            var Products = JsonConvert.DeserializeObject<List<ProductModel>>(ObjResponse);
+            var Products = JsonConvert.DeserializeObject<List<CartProductModel>>(ObjResponse);
 
             return Products;
 

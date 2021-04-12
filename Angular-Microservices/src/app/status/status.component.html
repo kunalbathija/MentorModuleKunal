@@ -1,0 +1,15 @@
+
+<div *ngIf="!success">
+    <h1>Order Incomplete</h1>
+    <h5>Order could not be completed - "{{errorMessage}}"</h5>
+    <h5>Please return to cart and try again</h5>
+    <button class="btn btn-danger" (click)="goToCart()">View Cart</button>
+</div>
+
+<div *ngIf="success">
+    <h1>Thank You</h1>
+    <h5>Payment Successfull</h5>
+    <button class="btn btn-success" (click)="goToProducts()">Continue Shopping</button>
+</div>
+
+

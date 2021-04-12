@@ -28,11 +28,12 @@ namespace TransactionsAPI
         {
             services.AddHttpClient<IProductsClient, ProductsClient>( c =>
             {
+                //if more links it will get messed up here, add below line in Client class
                 c.BaseAddress = new Uri("https://localhost:44325");
             });
 
             services.AddControllers();
-
+            services.AddCors();
             services.AddSingleton<IPaymentManager, PaymentManager>();
         }
 
@@ -47,6 +48,8 @@ namespace TransactionsAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
             app.UseAuthorization();
 

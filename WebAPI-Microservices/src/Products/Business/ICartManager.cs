@@ -7,9 +7,9 @@ namespace Business
 {
     public interface ICartManager
     {
-        void AddProduct(ProductModel product);
+        void AddProduct(CartProductModel newProduct);
         void EmptyCart();
-        List<ProductModel> GetCartProducts();
+        List<CartProductModel> GetCartProducts();
         int GetSize();
     }
 }
