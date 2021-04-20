@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CartService } from '../shared/cart.service';
-import { CartProductModel } from '../shared/cartProductModel';
-import { Product } from '../shared/product';
-import { ProductsService } from '../shared/products.service';
+import { CartService } from '../services/cart.service';
+import { CartProductModel } from '../models/cartProductModel';
+import { Product } from '../models/product';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-products',

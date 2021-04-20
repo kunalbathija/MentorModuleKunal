@@ -22,11 +22,11 @@ namespace Business
 
         public void AddProduct(CartProductModel newProduct)
         {
-            if(_cartProducts.FirstOrDefault(x => x.id == newProduct.id) != null)
+            if(!_cartProducts.Any(x => x.id == newProduct.id))
             {
+                this._cartProducts.Add(newProduct);
                 return;
             }
-            this._cartProducts.Add(newProduct);
         }
 
         public List<CartProductModel> GetCartProducts()

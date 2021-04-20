@@ -2,10 +2,9 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CartService } from '../shared/cart.service';
-import { CartProductModel } from '../shared/cartProductModel';
-import { Product } from '../shared/product';
-import { StatusService } from '../shared/status.service';
+import { CartService } from '../services/cart.service';
+import { CartProductModel } from '../models/cartProductModel';
+import { StatusService } from '../services/status.service';
 
 @Component({
   selector: 'app-cart',
