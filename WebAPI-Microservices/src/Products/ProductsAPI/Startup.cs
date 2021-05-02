@@ -1,16 +1,11 @@
 using Business;
+using Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductsAPI
 {
@@ -28,8 +23,13 @@ namespace ProductsAPI
         {
             services.AddControllers();
             services.AddCors();
-            services.AddSingleton<IProductManager, ProductManager>();
-            services.AddSingleton<ICartManager, CartManager>();
+            services.AddTransient<IProductManager, ProductManager>();
+            services.AddTransient<ICartManager, CartManager>();
+            services.AddDbContext<ProductDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("ProductDB")
+                    , b => b.MigrationsAssembly("ProductsAPI"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

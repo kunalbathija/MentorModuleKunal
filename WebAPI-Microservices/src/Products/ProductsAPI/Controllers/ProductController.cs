@@ -1,11 +1,8 @@
 ﻿using Business;
 using Common;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductsAPI.Controllers
 {
@@ -29,11 +26,12 @@ namespace ProductsAPI.Controllers
         }
 
         [HttpPost("cart/add")]
-        public ActionResult<int> AddProductToCart([FromBody] CartProductModel cartProductModel)
+        public ActionResult<int> AddProductToCart([FromBody] CartProductModel cartProduct)
         {
+            Console.WriteLine(cartProduct);
             try
             {
-                cartManager.AddProduct(cartProductModel);
+                cartManager.AddProduct(cartProduct);
                 var cartSize = cartManager.GetSize();
                 return Ok(cartSize);
             }

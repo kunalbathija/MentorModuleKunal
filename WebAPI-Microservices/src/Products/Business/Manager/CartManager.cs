@@ -22,15 +22,22 @@ namespace Business
 
         public void AddProduct(CartProductModel newProduct)
         {
+            Console.WriteLine("Zero");
+            Console.WriteLine(newProduct);
             if(!_cartProducts.Any(x => x.id == newProduct.id))
             {
                 this._cartProducts.Add(newProduct);
+                Console.WriteLine("First");
+                Console.WriteLine(_cartProducts[0]);
                 return;
             }
+            
         }
 
         public List<CartProductModel> GetCartProducts()
         {
+            Console.WriteLine("Second");
+            Console.WriteLine(_cartProducts);
             return this._cartProducts;
         }
 
