@@ -21,14 +21,15 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(private cartService: CartService, private router: Router, private statusService: StatusService) { }
 
   ngOnInit(): void {
-    this.subscription.add(this.cartService.getAllCartProducts()
-      .subscribe(result => {
-        this.cartService.cartProducts = result;
-        this.cartProducts = result;
-        const size = this.cartProducts.length;
-      }, error => {
-        console.log(error)
-      }));
+    this.cartProducts = this.cartService.getAllCartProducts();
+    // this.subscription.add(this.cartService.getAllCartProducts()
+    //   .subscribe(result => {
+    //     this.cartService.cartProducts = result;
+    //     this.cartProducts = result;
+    //     const size = this.cartProducts.length;
+    //   }, error => {
+    //     console.log(error)
+    //   }));
 
   }
 
@@ -37,11 +38,12 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   emptyCart(){
-    this.subscription.add(this.cartService.emptyCart().subscribe(res => {
-      window.location.reload();
-    }, error=>{
-      console.log(error)
-    }))
+    this.cartService.emptyCart();
+    // this.subscription.add(this.cartService.emptyCart().subscribe(res => {
+    //   window.location.reload();
+    // }, error=>{
+    //   console.log(error)
+    // }));
   }
 
 

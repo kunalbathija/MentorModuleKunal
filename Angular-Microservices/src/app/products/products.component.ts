@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ,private router: Router){}
 
   ngOnInit(){
+    this.cartSize = this.cartService.getCount();
     this.subscription.add(this.productService.getProducts()
                         .subscribe(result => {
                           this.productService.products = result;
@@ -30,13 +31,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
                           console.log(error)
                         }));
     
-    this.subscription.add(this.cartService.getCount()
-                        .subscribe(res => {
-                          //console.log(res);
-                          this.cartSize = res
-                        }, error=> {
-                          console.log(error)
-                        }));
+    // this.subscription.add(this.cartService.getCount()
+    //                     .subscribe(res => {
+    //                       //console.log(res);
+    //                       this.cartSize = res
+    //                     }, error=> {
+    //                       console.log(error)
+    //                     }));
 
     
   }
@@ -47,18 +48,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   addToCart(i: number, name: string){
     const newCartProduct: CartProductModel ={
-      id: i,
+      id: i+1,
       name: name,
       quantity: 0
     }
-    this.subscription.add(this.cartService.addProductToCart(newCartProduct)
-                      .subscribe(res => {
-                        this.cartSize = res
-                        console.log(res)
-                      }, error=> {
+    // this.subscription.add(this.cartService.addProductToCart(newCartProduct)
+    //                   .subscribe(res => {
+    //                     this.cartSize = res
+    //                     console.log(res)
+    //                   }, error=> {
                         
-                        console.log(error)
-                      }));
+    //                     console.log(error)
+    //                   }));
+    this.cartService.addProductToCart(newCartProduct);
+    this.cartSize = this.cartService.getCount();
+
   }
 
   ngOnDestroy(){

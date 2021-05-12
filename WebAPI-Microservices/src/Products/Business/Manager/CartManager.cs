@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Business
 {
+    //Not in use currently
     public class CartManager: ICartManager
     {
         private List<CartProductModel> _cartProducts;
@@ -24,20 +25,28 @@ namespace Business
         {
             Console.WriteLine("Zero");
             Console.WriteLine(newProduct);
-            if(!_cartProducts.Any(x => x.id == newProduct.id))
+            Console.WriteLine(newProduct.id);
+            Console.WriteLine(newProduct.name);
+            Console.WriteLine(newProduct.quantity);
+            /*if (!_cartProducts.Any(x => x.id == newProduct.id))
             {
-                this._cartProducts.Add(newProduct);
-                Console.WriteLine("First");
-                Console.WriteLine(_cartProducts[0]);
-                return;
-            }
-            
+                
+                
+            }*/
+            this._cartProducts.Add(newProduct);
+            Console.WriteLine("First");
+            Console.WriteLine(_cartProducts);
+            return;
+
         }
 
         public List<CartProductModel> GetCartProducts()
         {
             Console.WriteLine("Second");
-            Console.WriteLine(_cartProducts);
+            foreach (var i in _cartProducts)
+            {
+                Console.WriteLine(i);
+            }
             return this._cartProducts;
         }
 

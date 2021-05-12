@@ -25,6 +25,7 @@ namespace ProductsAPI.Controllers
             return productManager.GetAllProducts();
         }
 
+        //not in use
         [HttpPost("cart/add")]
         public ActionResult<int> AddProductToCart([FromBody] CartProductModel cartProduct)
         {
@@ -41,6 +42,7 @@ namespace ProductsAPI.Controllers
             }
         }
 
+        //not in use
         [HttpDelete("cart/delete")]
         public IActionResult EmptyCart()
         {
@@ -55,18 +57,21 @@ namespace ProductsAPI.Controllers
             }
         }
 
+        //not in use
         [HttpGet("cart/products")]
         public ActionResult<List<CartProductModel>> GetCartProducts()
         {
             return cartManager.GetCartProducts();
         }
 
+        //not in use
         [HttpGet("cart/size")]
         public ActionResult<int> GetCartSize()
         {
             return cartManager.GetSize();
         }
 
+        //not in use
         [HttpPost("availability")]
         public ActionResult<int> GetAvailabilty([FromBody] int id)
         {
