@@ -50,5 +50,31 @@ namespace Business
             var availibility = int.Parse(response.Content.ReadAsStringAsync().Result);
             return availibility;
         }
+
+        public async Task<Boolean> UpdateProducts(List<CartProductModel> productsBought)
+        {
+            foreach(CartProductModel product in productsBought)
+            {
+                var id = product.id;
+
+                var myContent = JsonConvert.SerializeObject(product);
+                var stringContent = new StringContent(myContent, UnicodeEncoding.UTF8, "application/json");
+
+                var response = await httpClient.PutAsync(new Uri("https://localhost:44325/api/product/update/" + id), stringContent);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return false;
+                }
+
+                var responseBoolean = Boolean.Parse(response.Content.ReadAsStringAsync().Result);
+                if (!responseBoolean)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

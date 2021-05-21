@@ -11,5 +11,6 @@ namespace Business
     {
         Task<int> GetAvailability(int id);
         Task<List<CartProductModel>> GetCartProducts();
+        Task<bool> UpdateProducts(List<CartProductModel> productsBought);
     }
 }

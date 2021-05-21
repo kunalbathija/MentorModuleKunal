@@ -1,0 +1,59 @@
+<div class="container" >
+    <h1 class="mb-3">Add A New Product Form</h1>
+    <div class="card">
+      <div class="card-header">Information</div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+          <div class="d-flex flex-column">
+            
+  
+            <div class="d-flex flex-wrap mb-3 justify-content-between">
+              <div >
+                <label for="name">Product Name:</label>
+              </div>
+              <div class="inputDiv">
+                <input 
+                class="form-control" 
+                type="text" 
+                name="name" 
+                id="name" ngModel required #name="ngModel" [(ngModel)]="newProduct.name">
+                <span class="form-text" *ngIf="name.invalid && name.touched">This field is required</span>
+              </div>
+            </div>
+  
+            <div class="d-flex flex-wrap mb-3 justify-content-between">
+              <div >
+                <label for="description">Product Description:</label>
+              </div>
+              <div class="inputDiv">
+                <input 
+                class="form-control" 
+                type="text" 
+                name="description" 
+                id="description" ngModel required #team="ngModel" [(ngModel)]="newProduct.description">
+                <span class="form-text" *ngIf="team.invalid && team.touched">This field is required</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap mb-3 justify-content-between">
+                <div >
+                  <label for="availability">Product Availability:</label>
+                </div>
+                <div class="inputDiv">
+                  <input 
+                  class="form-control" 
+                  type="number" 
+                  name="availability" 
+                  id="availability" ngModel required #team="ngModel" [(ngModel)]="newProduct.availability">
+                  <span class="form-text" *ngIf="team.invalid && team.touched">This field is required</span>
+                </div>
+              </div>
+  
+          </div>
+          <button class="btn btn-primary float-end" [disabled]="!myForm.valid">Submit</button>
+  
+        </form>
+      </div>
+    </div>
+  </div>
+  

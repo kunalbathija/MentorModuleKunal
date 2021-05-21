@@ -7,7 +7,9 @@ namespace Business
 {
     public interface IProductManager
     {
+        void Add(ProductModel newProduct);
         List<ProductModel> GetAllProducts();
         ProductModel GetProductById(int id);
+        void Update(ProductModel oldProduct, CartProductModel newProduct);
     }
 }

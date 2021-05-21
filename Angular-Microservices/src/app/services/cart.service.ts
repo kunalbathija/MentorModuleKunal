@@ -30,10 +30,9 @@ export class CartService {
 
     addProductToCart(newCartProduct: CartProductModel){
         //return this.http.post('https://localhost:44325/api/product/cart/add', newCartProduct);
-        if(this.cartProducts.find(x => x.id == newCartProduct.id)){
-            return;
+        if( ! this.cartProducts.find(x => x.id == newCartProduct.id)){
+            this.cartProducts.push(newCartProduct);
         }
-        this.cartProducts.push(newCartProduct);
     }
 
     emptyCart(){

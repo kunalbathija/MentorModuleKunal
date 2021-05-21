@@ -53,6 +53,7 @@ export class CartComponent implements OnInit, OnDestroy {
       this.statusService.success = true;
       console.log(res)
       this.statusService.errorMessage = res.toString();
+      this.cartService.emptyCart();
       this.router.navigate(['/status']);
     }, error => {
       this.statusService.success = false;

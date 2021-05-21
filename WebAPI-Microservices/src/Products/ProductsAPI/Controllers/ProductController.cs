@@ -1,6 +1,7 @@
 ﻿using Business;
 using Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
@@ -12,24 +13,79 @@ namespace ProductsAPI.Controllers
     {
         private readonly IProductManager productManager;
         private readonly ICartManager cartManager;
+        private readonly ILogger<ProductController> _logger;
 
-        public ProductController(IProductManager productManager, ICartManager cartManager)
+        public ProductController(IProductManager productManager, ICartManager cartManager, ILogger<ProductController> logger)
         {
             this.productManager = productManager;
             this.cartManager = cartManager;
+            _logger = logger;
         }
 
         [HttpGet] 
         public ActionResult<List<ProductModel>> Get()
         {
-            return productManager.GetAllProducts();
+            try
+            {
+                return productManager.GetAllProducts();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error Occured: ", ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("add")]
+        public ActionResult<int> AddNewProduct([FromBody] ProductModel newProduct)
+        {
+            try
+            {
+                productManager.Add(newProduct);
+                _logger.LogInformation("A product {productname} added", newProduct.name);
+                return Ok(1);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error Occured: ", ex.Message);
+                return BadRequest(ex.Message);
+            }
+                        
+        }
+
+        [HttpPut("update/{id}")]
+        public ActionResult<Boolean> UpdateProduct(int id, [FromBody] CartProductModel productBaught)
+        {
+            if (productBaught == null)
+            {
+                return BadRequest("New Product is null");
+            }
+
+            ProductModel productToUpdate = productManager.GetProductById(id);
+            
+            if(productToUpdate == null)
+            {
+                return NotFound("Product record couldn't be found.");
+            }
+
+            try
+            {
+                productManager.Update(productToUpdate, productBaught);
+                _logger.LogInformation("{productname} updated", productToUpdate.name);
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error Occured: ", ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
         //not in use
         [HttpPost("cart/add")]
         public ActionResult<int> AddProductToCart([FromBody] CartProductModel cartProduct)
         {
-            Console.WriteLine(cartProduct);
             try
             {
                 cartManager.AddProduct(cartProduct);

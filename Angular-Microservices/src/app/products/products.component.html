@@ -4,6 +4,7 @@
         <h1>Products</h1>
       </div>
       <div>
+        <button class="btn btn-primary me-3" (click)="goToAddProduct()">Add New Product</button>
         <button class="btn btn-primary" (click)="goToCart()">View Cart ({{cartSize}})</button>
       </div>
     </div>
@@ -23,7 +24,7 @@
         <td>{{product.name}}</td>
         <td>{{product.availability}}</td>
         <td>{{product.description}}</td>
-        <td><a (click)="addToCart(i, product.name)"><h6>Add</h6></a></td>
+        <td><a (click)="addToCart(product.id, product.name)"><h6>Add</h6></a></td>
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,13 @@
+05/19/2021 20:57:45 +05:30 Application Starting.
+05/19/2021 20:58:27 +05:30 Buy Now Call requested
+05/19/2021 20:58:28 +05:30 Failure in payment
+05/19/2021 20:58:30 +05:30 Buy Now Call requested
+05/19/2021 20:58:30 +05:30 Failure in payment
+05/19/2021 20:58:31 +05:30 Buy Now Call requested
+05/19/2021 20:58:31 +05:30 2 products bought
+05/20/2021 20:20:26 +05:30 Application Starting.
+05/20/2021 20:21:26 +05:30 Application Starting.
+05/20/2021 20:23:05 +05:30 Application Starting.
+05/20/2021 21:13:16 +05:30 Application Starting.
+05/20/2021 21:34:37 +05:30 Application Starting.
+05/20/2021 21:44:04 +05:30 Application Starting.

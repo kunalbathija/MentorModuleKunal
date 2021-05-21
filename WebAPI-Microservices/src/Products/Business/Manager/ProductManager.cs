@@ -6,22 +6,49 @@ namespace Business
 {
     public class ProductManager: IProductManager
     {
-        private readonly ProductDBContext productDBContext;
+        private readonly ProductDBContext _productDBContext;
 
         public ProductManager(ProductDBContext productDBContext)
         {
-            this.productDBContext = productDBContext;
+            _productDBContext = productDBContext;
         }
 
 
         public List<ProductModel> GetAllProducts()
         {
-            return productDBContext.Products.ToList();
+            return _productDBContext.Products.ToList();
         }
 
         public ProductModel GetProductById(int id)
         {
-            return productDBContext.Products.First(x => x.id == id);
+            return _productDBContext.Products.FirstOrDefault(x => x.id == id);
+        }
+
+        public void Add(ProductModel newProduct)
+        {
+            _productDBContext.Products.Add(newProduct);
+            _productDBContext.SaveChanges();
+        } 
+
+        public void Update(ProductModel oldProduct, CartProductModel productBaught)
+        {
+            var difference = oldProduct.availability - productBaught.quantity;
+            if (difference <= 0)
+            {
+                Delete(oldProduct);
+            }
+            else
+            {
+                oldProduct.availability = difference;
+                _productDBContext.SaveChanges();
+            }
+
+        }
+
+        public void Delete(ProductModel product)
+        {
+            _productDBContext.Products.Remove(product);
+            _productDBContext.SaveChanges();
         }
     }
 }

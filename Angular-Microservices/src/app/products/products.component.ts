@@ -46,9 +46,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/cart']);
   }
 
+  goToAddProduct(){
+    this.router.navigate(['/addProduct']);
+  }
+
   addToCart(i: number, name: string){
     const newCartProduct: CartProductModel ={
-      id: i+1,
+      id: i,
       name: name,
       quantity: 0
     }

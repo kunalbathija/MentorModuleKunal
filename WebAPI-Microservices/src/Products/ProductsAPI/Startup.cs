@@ -23,8 +23,8 @@ namespace ProductsAPI
         {
             services.AddControllers();
             services.AddCors();
-            services.AddTransient<IProductManager, ProductManager>();
-            services.AddTransient<ICartManager, CartManager>();
+            services.AddScoped<IProductManager, ProductManager>();
+            services.AddSingleton<ICartManager, CartManager>();
             services.AddDbContext<ProductDBContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ProductDB")

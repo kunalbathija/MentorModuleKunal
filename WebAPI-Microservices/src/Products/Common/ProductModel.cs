@@ -10,10 +10,13 @@ namespace Common
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
+        [Required]
         public string name { get; set; }
-
+        
+        [Required]
         public int availability { get; set; }
 
+        [Required]
         public string description { get; set; }
     }
 }

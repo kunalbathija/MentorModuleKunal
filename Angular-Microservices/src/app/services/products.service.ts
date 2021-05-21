@@ -17,4 +17,8 @@ export class ProductsService{
         return this.http.get<Product[]>('https://localhost:44325/api/product');
     }
 
+    addNewProduct(newProdct: any){
+        return this.http.post('https://localhost:44325/api/product/add',newProdct);
+    }
+
 }
