@@ -1,4 +1,5 @@
 ﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,8 +31,15 @@ namespace Business
             _productDBContext.SaveChanges();
         } 
 
-        public void Update(ProductModel oldProduct, CartProductModel productBaught)
+        public void Update(int id, CartProductModel productBaught)
         {
+            ProductModel oldProduct = GetProductById(id);
+
+            if (oldProduct == null)
+            {
+                throw new InvalidOperationException("Product record couldn't be found.");
+            }
+
             var difference = oldProduct.availability - productBaught.quantity;
             if (difference <= 0)
             {
@@ -41,8 +49,7 @@ namespace Business
             {
                 oldProduct.availability = difference;
                 _productDBContext.SaveChanges();
-            }
-
+            }            
         }
 
         public void Delete(ProductModel product)

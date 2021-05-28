@@ -64,14 +64,9 @@ namespace Business
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return false;
+                    throw new InvalidOperationException("Something went wrong.");
                 }
 
-                var responseBoolean = Boolean.Parse(response.Content.ReadAsStringAsync().Result);
-                if (!responseBoolean)
-                {
-                    return false;
-                }
             }
 
             return true;

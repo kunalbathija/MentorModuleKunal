@@ -30,7 +30,8 @@ export class AddProductComponent implements OnInit {
     console.log(this.newProduct);
     this.subscription = this.productsService.addNewProduct(this.newProduct)
         .subscribe(res => {
-          if(res == 1){
+          console.log(res.status);
+          if(res.status == 200){
             this.router.navigate(['products'])
             this.showSuccess();
           }
@@ -45,7 +46,7 @@ export class AddProductComponent implements OnInit {
   }
 
   showError() {
-    this.toastr.success('Something went wrong', 'Error');
+    this.toastr.error('Something went wrong', 'Error');
   }
 
 }

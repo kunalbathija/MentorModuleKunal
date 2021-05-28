@@ -43,8 +43,7 @@ namespace ProductsAPI.Controllers
             try
             {
                 productManager.Add(newProduct);
-                _logger.LogInformation("A product {productname} added", newProduct.name);
-                return Ok(1);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -55,25 +54,17 @@ namespace ProductsAPI.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public ActionResult<Boolean> UpdateProduct(int id, [FromBody] CartProductModel productBaught)
+        public ActionResult UpdateProduct(int id, [FromBody] CartProductModel productBaught)
         {
             if (productBaught == null)
             {
                 return BadRequest("New Product is null");
             }
 
-            ProductModel productToUpdate = productManager.GetProductById(id);
-            
-            if(productToUpdate == null)
-            {
-                return NotFound("Product record couldn't be found.");
-            }
-
             try
             {
-                productManager.Update(productToUpdate, productBaught);
-                _logger.LogInformation("{productname} updated", productToUpdate.name);
-                return Ok(true);
+                productManager.Update(id, productBaught);
+                return Ok();
             }
             catch (Exception ex)
             {

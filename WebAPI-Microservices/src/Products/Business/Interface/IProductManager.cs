@@ -10,6 +10,6 @@ namespace Business
         void Add(ProductModel newProduct);
         List<ProductModel> GetAllProducts();
         ProductModel GetProductById(int id);
-        void Update(ProductModel oldProduct, CartProductModel newProduct);
+        void Update(int id, CartProductModel newProduct);
     }
 }

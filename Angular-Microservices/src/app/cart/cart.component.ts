@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService } from '../services/cart.service';
@@ -52,7 +51,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.subscription.add(this.cartService.buyNow(this.cartProducts).subscribe(res => {
       this.statusService.success = true;
       console.log(res)
-      this.statusService.errorMessage = res.toString();
+      this.statusService.errorMessage = res;
       this.cartService.emptyCart();
       this.router.navigate(['/status']);
     }, error => {

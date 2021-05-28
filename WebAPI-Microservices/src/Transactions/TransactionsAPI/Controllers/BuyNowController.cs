@@ -2,6 +2,7 @@
 using Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -30,40 +31,45 @@ namespace TransactionsAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<string>>> BuyNow([FromBody] List<CartProductModel> cartProducts)
+        public async Task<ActionResult<string>> BuyNow([FromBody] List<CartProductModel> cartProducts)
         {
-            _logger.LogInformation("Buy Now Call requested");
-            //Checking availibity
-            foreach(CartProductModel cartProduct in cartProducts)
+            try
             {
-                var tempAvailibilty = await productsClient.GetAvailability(cartProduct.id);
-                if (tempAvailibilty < cartProduct.quantity)
+                //Checking availibity
+                foreach (CartProductModel cartProduct in cartProducts)
                 {
-                    return BadRequest(new string[] { "The product " + cartProduct.name + " is out of stock" });
+                    var tempAvailibilty = await productsClient.GetAvailability(cartProduct.id);
+                    if (tempAvailibilty < cartProduct.quantity)
+                    {
+                        return BadRequest("The product " + cartProduct.name + " is out of stock" );
+                    }
+
                 }
 
-            }
-            
-            //Checking payment
-            if (paymentManager.checkPayment())
-            {
-                if (productsClient.UpdateProducts(cartProducts).Result)
+                //Checking payment
+                if (paymentManager.checkPayment())
                 {
-                    _logger.LogInformation("{size} products bought", cartProducts.Count);
-                    return Ok(new string[] { "Success" });
+                    if (await productsClient.UpdateProducts(cartProducts))
+                    {
+                        return Ok("Success");
+                    }
+                    else
+                    {
+                        return BadRequest("Something went wrong");
+                    }
                 }
                 else
                 {
-                    return BadRequest(new string[] { "Something went wrong" });
+                    return BadRequest("Failure in payment");
                 }
+
             }
-            else
+            catch (Exception ex)
             {
-                _logger.LogInformation("Failure in payment");
-                return BadRequest(new string[] { "Failure in payment" });
+                _logger.LogError(ex, "Error Occured: ", ex.Message);
+                return BadRequest(ex.Message);
             }
-
-
+            
         }
     }
 }

@@ -41,6 +41,8 @@ export class CartService {
     }
 
     buyNow(cartProducts: CartProductModel[]){
-        return this.http.post('https://localhost:44343/api/buynow', cartProducts)
+        return this.http.post('https://localhost:44343/api/buynow', cartProducts,{
+            responseType: 'text'
+        })
     }
 }

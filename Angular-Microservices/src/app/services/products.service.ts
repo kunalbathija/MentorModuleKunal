@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Product } from "../models/product";
@@ -18,7 +18,10 @@ export class ProductsService{
     }
 
     addNewProduct(newProdct: any){
-        return this.http.post('https://localhost:44325/api/product/add',newProdct);
+        return this.http.post('https://localhost:44325/api/product/add',newProdct,
+        {
+            observe: 'response'
+        });
     }
 
 }
